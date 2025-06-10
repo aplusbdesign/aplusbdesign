@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주가 분석기</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      padding: 1rem;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    h1 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .input-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .input-group input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: 500;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    canvas {
+      max-width: 100%;
+      height: 300px !important;
+    }
+  </style>
+</head>
+<body>
+  <h1>주가 분석기</h1>
+  <div class="input-group">
+    <input type="text" id="ticker" placeholder="종목 티커 (예: PLTR)" />
+    <button onclick="fetchData()">데이터 불러오기</button>
+  </div>
+  <p id="analysis" class="result"></p>
+  <div class="card">
+    <canvas id="stockChart"></canvas>
+  </div>
+
+  <script>
+    async function fetchData() {
+      const analysisEl = document.getElementById("analysis");
+      const ticker = document.getElementById("ticker").value.trim().toUpperCase();
+      if (!ticker) {
+        analysisEl.textContent = "종목 티커를 입력하세요.";
+        return;
+      }
+      try {
+        const today = new Date();
+        const toDate = today.toISOString().split('T')[0];
+        const pastDate = new Date(today.setFullYear(today.getFullYear() - 5)).toISOString().split('T')[0];
+
+        const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${pastDate}/${toDate}?adjusted=true&sort=asc&apiKey=ftFQRa93lAsoHJAudHqxS2QiPn8ks7O0`;
+
+        const res = await fetch(url);
+        const json = await res.json();
+        console.log("API 응답 결과:", json);
+
+        if (!json || !['OK', 'DELAYED'].includes(json.status) || !json.results) {
+          analysisEl.textContent = `데이터 오류 발생: 상태코드 → ${json.status || '없음'}`;
+          return;
+        }
+
+        const stockData = json.results.map((item) => ({
+          date: new Date(item.t).toISOString().slice(0, 10),
+          close: item.c
+        }));
+
+        renderChart(stockData, ticker);
+        analyzeData(stockData);
+      } catch (e) {
+        console.error("API 호출 중 오류:", e);
+        analysisEl.textContent = `API 호출 오류: ${e.message || '네트워크 오류 또는 차단'}`;
+      }
+    }
+
+    function renderChart(data, ticker) {
+      const ctx = document.getElementById("stockChart").getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: data.map(d => d.date),
+          datasets: [{
+            label: `${ticker} 종가`,
+            data: data.map(d => d.close),
+            borderColor: "#007bff",
+            borderWidth: 2,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              title: { display: true, text: "날짜" }
+            },
+            y: {
+              title: { display: true, text: "종가 ($)" }
+            }
+          }
+        }
+      });
+    }
+
+    function analyzeData(data) {
+      const prices = data.map(d => d.close);
+      const currentPrice = prices[prices.length - 1];
+      const high52 = Math.max(...prices.slice(-252));
+      const low52 = Math.min(...prices.slice(-252));
+      let recommendation = "";
+      if (currentPrice < low52 * 1.1) {
+        recommendation = "매수 유망 구간입니다.";
+      } else if (currentPrice > high52 * 0.9) {
+        recommendation = "매도 유망 구간입니다.";
+      } else {
+        recommendation = "관망이 필요한 시점입니다.";
+      }
+      document.getElementById("analysis").textContent =
+        `현재가: $${currentPrice.toFixed(2)} | 52주 최저: $${low52} | 52주 최고: $${high52} → ${recommendation}`;
+    }
+  </script>
+</body>
+</html>
