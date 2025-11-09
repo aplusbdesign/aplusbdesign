@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Discover Races</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative min-h-screen w-full flex flex-col">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<!-- Top App Bar -->
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="flex size-10 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-gray-800 dark:text-white text-3xl">menu</span>
+</div>
+<h1 class="text-xl font-bold leading-tight tracking-tighter text-gray-900 dark:text-white flex-1 text-center">Discover Races</h1>
+<div class="flex size-10 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-gray-800 dark:text-white text-3xl">person</span>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-4 py-2">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full shadow-sm">
+<div class="text-gray-400 dark:text-primary/70 flex bg-gray-200 dark:bg-[#1A3123] items-center justify-center pl-4 rounded-l-full border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-full text-gray-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-200 dark:bg-[#1A3123] h-full placeholder:text-gray-500 dark:placeholder:text-primary/70 px-4 text-base font-normal leading-normal" placeholder="Search by name, city..." value=""/>
+</div>
+</label>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 p-4 pt-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none]">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 dark:bg-primary/20 px-4">
+<span class="material-symbols-outlined text-gray-900 dark:text-primary text-base">tune</span>
+<p class="text-gray-900 dark:text-white text-sm font-medium leading-normal">Filters</p>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-[#1A3123] px-4">
+<p class="text-gray-800 dark:text-white text-sm font-medium leading-normal">Distance</p>
+<span class="material-symbols-outlined text-gray-500 dark:text-primary/70 text-base">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-[#1A3123] px-4">
+<p class="text-gray-800 dark:text-white text-sm font-medium leading-normal">Date</p>
+<span class="material-symbols-outlined text-gray-500 dark:text-primary/70 text-base">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-[#1A3123] px-4">
+<p class="text-gray-800 dark:text-white text-sm font-medium leading-normal">Race Type</p>
+<span class="material-symbols-outlined text-gray-500 dark:text-primary/70 text-base">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col gap-4 p-4 pt-0">
+<!-- Map and Toggle Section -->
+<div class="relative">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl object-cover shadow-lg" data-alt="A stylized map showing race locations with pins" data-location="Cityscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDifm3_Epo8S_x8UlCfBj8AycNl98sgHhyUf14grqgfNXPmQSHZ40Aw90iieSzX-N9nNqm3MRU-adtWf0Nyr2aSgMCa82KgPlODT7P_xKsIRI9DMf1XhKcuTrCvlsUXt-ZEJwecKqJivcJH1o5--O7bzRyZsPzN8gJzJYsGIaLutHbmNwlNYSdZIaa7O8OR65__nXlOSgoSu6duEUOhbqpxxFqBxreKMJ1F1EHPJ92iD0SuD7MkzM2XsMrXgUDLLZQDZ4fQUXLOKII");'></div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-40">
+<div class="flex h-10 flex-1 items-center justify-center rounded-full bg-gray-200/80 dark:bg-[#1A3123]/80 p-1 backdrop-blur-sm">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 has-[:checked]:bg-background-light dark:has-[:checked]:bg-background-dark has-[:checked]:shadow-md text-gray-500 dark:text-primary/70 has-[:checked]:text-gray-900 dark:has-[:checked]:text-white text-sm font-medium leading-normal transition-colors">
+<span class="truncate">Map</span>
+<input checked="" class="invisible w-0" name="view-toggle" type="radio" value="Map"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 has-[:checked]:bg-background-light dark:has-[:checked]:bg-background-dark has-[:checked]:shadow-md text-gray-500 dark:text-primary/70 has-[:checked]:text-gray-900 dark:has-[:checked]:text-white text-sm font-medium leading-normal transition-colors">
+<span class="truncate">List</span>
+<input class="invisible w-0" name="view-toggle" type="radio" value="List"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Race Cards List -->
+<div class="flex flex-col gap-4">
+<h2 class="text-lg font-bold text-gray-900 dark:text-white px-1">Races Near You</h2>
+<!-- Race Card 1 -->
+<div class="bg-gray-100 dark:bg-[#1A3123] rounded-xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-lg transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Golden Gate Half</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400">Sun, Oct 27, 2024</p>
+<p class="text-sm text-gray-600 dark:text-gray-400">San Francisco, CA</p>
+</div>
+<button class="p-2 text-gray-500 dark:text-primary/70 hover:text-primary dark:hover:text-primary">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-gray-200 dark:border-primary/20">
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary-800 dark:text-primary">Half Marathon</span>
+<span class="inline-flex items-center rounded-full bg-gray-200 dark:bg-background-dark px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300">10K</span>
+<span class="inline-flex items-center rounded-full bg-gray-200 dark:bg-background-dark px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300">5K</span>
+</div>
+</div>
+<!-- Race Card 2 -->
+<div class="bg-gray-100 dark:bg-[#1A3123] rounded-xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-lg transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Brooklyn Marathon</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400">Sat, Nov 9, 2024</p>
+<p class="text-sm text-gray-600 dark:text-gray-400">Brooklyn, NY</p>
+</div>
+<button class="p-2 text-primary dark:text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-gray-200 dark:border-primary/20">
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary-800 dark:text-primary">Marathon</span>
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary-800 dark:text-primary">Half Marathon</span>
+</div>
+</div>
+<!-- Race Card 3 -->
+<div class="bg-gray-100 dark:bg-[#1A3123] rounded-xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-lg transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="font-bold text-lg text-gray-900 dark:text-white">Turkey Trot 5K</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400">Thu, Nov 28, 2024</p>
+<p class="text-sm text-gray-600 dark:text-gray-400">Austin, TX</p>
+</div>
+<button class="p-2 text-gray-500 dark:text-primary/70 hover:text-primary dark:hover:text-primary">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-gray-200 dark:border-primary/20">
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary-800 dark:text-primary">5K</span>
+<span class="inline-flex items-center rounded-full bg-gray-200 dark:bg-background-dark px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300">Trail</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<div class="fixed bottom-6 right-6 z-20">
+<button class="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-background-dark shadow-lg hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+</div>
+</body></html>
